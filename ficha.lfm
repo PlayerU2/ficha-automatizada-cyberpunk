@@ -3157,65 +3157,72 @@
     <!-- ============================== ABA 1 — PERFIL ==================== -->
     <scrollBox name="painel1" align="client" margins="{left=10,right=10,top=8,bottom=8}">
 
-        <tituloSec titulo="IDENTIDADE" cor="#23E5D3" ajuda=""/>
-        <layout align="top" height="283" margins="{top=4}">
-            <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="bevel">
-                <layout align="right" width="220" margins="{right=8,top=8,bottom=8}">
-                    <image align="client" field="imagemPerfil" editable="true"
-                           animate="true" style="autoFit"/>
+        <tituloSec titulo="DOSSIE DE REGISTRO // NCPD DATABASE" cor="#23E5D3" ajuda=""/>
+        <layout align="top" height="283" margins="{top=4,bottom=10}">
+            <rectangle align="client" color="#0A0C12" strokeColor="#1C2130" strokeSize="1"
+                       xradius="6" yradius="6" cornerType="bevel">
+                
+                <layout align="left" width="220" margins="{left=10,right=10,top=10,bottom=10}">
+                    <rectangle align="client" color="#05060A" strokeColor="#23E5D3" strokeSize="1"
+                               xradius="4" yradius="4" cornerType="bevel">
+                        <image align="client" field="imagemPerfil" editable="true"
+                               animate="true" style="autoFit" margins="{left=2,right=2,top=2,bottom=2}"/>
+                    </rectangle>
                 </layout>
-                <layout align="client" margins="{left=10,right=8,top=8,bottom=8}">
+                
+                <layout align="client" margins="{left=4,right=10,top=10,bottom=10}">
                     <layout align="top" height="45">
-                        <campoTxt rot="NOME" campo="nome" w="280"/>
+                        <campoTxt rot="NOME COMPLETO" campo="nome" w="260"/>
                         <campoTxt rot="ALTER EGO / RUA" campo="alterEgo" w="180"/>
                         <layout align="client" margins="{right=6}">
-                            <label align="top" height="17" text="CONCEITO — quem era antes de virar edgerunner" class="rotMin"/>
-                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="conceito"></edit></rectangle>
+                            <label align="top" height="17" text="CONCEITO // HISTORICO PREGRESSO" class="rotMin"/>
+                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="conceito"></edit></rectangle>
                         </layout>
                     </layout>
+                    
                     <layout align="top" height="45" margins="{top=4}">
-                        <campoTxt rot="PROFISSÃO / PAPEL" campo="profissao" w="160"/>
-                        <campoTxt rot="GÊNERO" campo="genero" w="110"/>
-                        <campoTxt rot="IDADE" campo="idade" w="70"/>
-                        <campoTxt rot="ALTURA" campo="altura" w="80"/>
-                        <campoTxt rot="PESO" campo="peso" w="80"/>
+                        <campoTxt rot="PAPEL / PROFISSAO" campo="profissao" w="160"/>
+                        <campoTxt rot="GENERO" campo="genero" w="90"/>
+                        <campoTxt rot="IDADE" campo="idade" w="60"/>
+                        <campoTxt rot="ALTURA" campo="altura" w="65"/>
+                        <campoTxt rot="PESO" campo="peso" w="65"/>
                         <layout align="client" margins="{right=6}">
-                            <label align="top" height="17" text="AFILIAÇÃO / GANGUE / CORP" class="rotMin"/>
-                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="afiliacao"></edit></rectangle>
+                            <label align="top" height="17" text="AFILIACAO / CORP / GANGUE" class="rotMin"/>
+                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="afiliacao"></edit></rectangle>
                         </layout>
                     </layout>
 
-                    <layout align="top" height="18" margins="{top=10}">
-                        <rectangle align="left" width="2" color="#FF3B7F"/>
-                        <label align="client" text="   GANCHOS PARA O MESTRE — Cap. 14, passo 8" class="h2"
-                               vertTextAlign="center"/>
+                    <layout align="top" height="18" margins="{top=8}">
+                        <rectangle align="left" width="2" color="#FFB03A"/>
+                        <label align="client" text="   [ACESSO RESTRITO // GANCHOS DO MESTRE] - Cap. 14, passo 8" class="h2" fontColor="#FFB03A" vertTextAlign="center"/>
                     </layout>
                     <layout align="top" height="45" margins="{top=2}">
-                        <campoTxt rot="UM CONTATO" campo="ganchoContato" w="240"/>
-                        <campoTxt rot="UM RIVAL" campo="ganchoRival" w="240"/>
+                        <campoTxt rot="UM CONTATO" campo="ganchoContato" w="220"/>
+                        <campoTxt rot="UM RIVAL" campo="ganchoRival" w="220"/>
                         <layout align="client" margins="{right=6}">
                             <label align="top" height="17" text="UM SEGREDO" class="rotMin"/>
-                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="ganchoSegredo"></edit></rectangle>
+                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="ganchoSegredo"></edit></rectangle>
                         </layout>
                     </layout>
+                    
                     <label name="lblEstadoTexto" align="top" height="30" text="" class="ajuda"
-                           wordWrap="true" margins="{top=8,right=6}"/>
+                           wordWrap="true" margins="{top=6,right=6}"/>
                 </layout>
             </rectangle>
         </layout>
 
-        <tituloSec titulo="SINAIS VITAIS" cor="#FF3B7F" ajuda=""/>
+
+        <tituloSec titulo="MONITORAMENTO BIOMEDICO [HUD]" cor="#FF3B7F" ajuda=""/>
         <layout name="linhaHud" align="top" height="142" margins="{top=4}">
             <cardPvFoco id="Pv"   rotulo="PONTOS DE VIDA" cor="#FF3B7F"
                         campoAtual="pvAtual"   campoMax="pv"         conta="pvConta"   ajuste="ajustePv"/>
             <cardPvFoco id="Foco" rotulo="FOCO NEURAL"    cor="#8A63C9"
                         campoAtual="focoAtual" campoMax="focoNeural" conta="focoConta" ajuste="ajusteFoco"/>
             <cardValor id="Esquiva"    rotulo="ESQUIVA"     cor="#23E5D3" campo="esquiva"    conta="esquivaConta"    ajuste="ajusteEsquiva"/>
-            <cardValor id="Vel"        rotulo="VEL. BÁSICA" cor="#23E5D3" campo="velBasica"  conta="velConta"        ajuste="ajusteVel"/>
+            <cardValor id="Vel"        rotulo="VEL. BASICA" cor="#23E5D3" campo="velBasica"  conta="velConta"        ajuste="ajusteVel"/>
             <cardValor id="Iniciativa" rotulo="INICIATIVA"  cor="#FFB03A" campo="iniciativa" conta="iniciativaConta" ajuste="ajusteIniciativa"/>
-            <cardValor id="Percepcao"  rotulo="PERCEPÇÃO"   cor="#3DD68C" campo="percepcao"  conta="percepcaoConta"  ajuste="ajustePercepcao"/>
-            <cardValor id="BonusDano"  rotulo="BÔNUS DE DANO" cor="#FF3B7F" campo="bonusDano" conta="bonusDanoConta" ajuste="ajusteBonusDano"/>
+            <cardValor id="Percepcao"  rotulo="PERCEPCAO"   cor="#3DD68C" campo="percepcao"  conta="percepcaoConta"  ajuste="ajustePercepcao"/>
+            <cardValor id="BonusDano"  rotulo="BONUS DE DANO" cor="#FF3B7F" campo="bonusDano" conta="bonusDanoConta" ajuste="ajusteBonusDano"/>
             <cardValor id="Humanidade" rotulo="HUMANIDADE"  cor="#FF3B7F" campo="humanidade" conta="humanidadeConta" ajuste="ajusteHumanidade"/>
         </layout>
 
@@ -3231,9 +3238,9 @@
 
         <tituloSec titulo="PERSONALIDADE E MANEIRISMOS" cor="#8A63C9" ajuda=""/>
         <layout align="top" height="213" margins="{top=4,bottom=8}">
-            <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1">
+            <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1" cornerType="bevel" xradius="6" yradius="6">
                 <rectangle align="client" color="#080A0F" strokeColor="#232B3D" strokeSize="1"
-                           xradius="2" yradius="2" cornerType="round"
+                           xradius="2" yradius="2" cornerType="bevel"
                            margins="{left=6,right=6,top=6,bottom=6}">
                     <textEditor align="client" field="personalidade" transparent="true"
                                 margins="{left=5,right=5,top=4,bottom=4}"/>
@@ -3241,7 +3248,7 @@
             </rectangle>
         </layout>
 
-    </scrollBox>
+</scrollBox>
 
     <!-- ====================== ABA 2 — ATRIBUTOS E PERÍCIAS =============== -->
     <scrollBox name="painel2" align="none" visible="false" margins="{left=10,right=10,top=8,bottom=8}">
