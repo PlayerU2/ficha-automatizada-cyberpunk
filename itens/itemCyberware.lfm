@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Linha de cyberware. `instalado` é o que liga o efeito e o custo de
+  Humanidade: um implante removido continua na lista (para o histórico) mas
+  para de agir. A caixinha e a conta têm de dizer sempre a mesma coisa — na
+  v1 o campo nem existia, e a lista mostrava desmarcado o que a Humanidade
+  já estava cobrando.
+-->
+<form name="itemCyberware" height="46" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+
+        <layout align="top" height="26">
+            <rectangle align="left" width="230" margins="{left=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="nome"></edit></rectangle>
+            <rectangle name="chip_instalado" align="left" width="52" color="#080A0F"
+                       strokeColor="#2A3145" strokeSize="1" xradius="2" yradius="2"
+                       cornerType="round" cursor="handPoint" hint="inst."
+                       margins="{top=4,bottom=4,right=3}">
+                <label name="txt_instalado" align="client" text="inst." class="val" fontSize="12"
+                       horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                <event name="onClick"><![CDATA[
+                    sheet.instalado = not (sheet.instalado == true);
+                    
+                    if NCN ~= nil then
+                        NCN.chipItem(self, sheet, "instalado", "#23E5D3");
+                        NCN.tocar(NDB.getRoot(sheet));
+                    end;
+                ]]></event>
+            </rectangle>
+            <layout align="right" width="290">
+                <rectangle align="left" width="80" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="preco" type="number" horzTextAlign="center"></edit></rectangle>
+                <rectangle align="left" width="52" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="humanidade" type="number" horzTextAlign="center" hint="Como o livro imprime: 0, -1, -2 ou -3. Soma direto na Humanidade."></edit></rectangle>
+                <label name="lblTipo" align="left" width="130" text="" class="rot"
+                       horzTextAlign="center" vertTextAlign="center"/>
+                <rectangle align="left" width="26" color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                    cursor="handPoint" hint="Remover este implante">
+                <label align="client" text="x" class="aba" fontColor="#FF3B7F"
+                       horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                <event name="onClick"><![CDATA[
+                    local raiz = NDB.getRoot(sheet);
+                    NDB.deleteNode(sheet);
+                    if NCN ~= nil then NCN.tocar(raiz); end;
+                ]]></event>
+            </rectangle>
+            </layout>
+            <rectangle align="client" margins="{left=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="efeito"></edit></rectangle>
+        </layout>
+
+        <layout name="linhaNota" align="top" height="18">
+            <label align="left" width="46" text="  nota" class="rotMin" vertTextAlign="center"/>
+            <rectangle align="client" margins="{right=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="nota" hint="Onde o livro não fixa o valor do bônus, combine com o mestre e anote aqui"></edit></rectangle>
+        </layout>
+
+    </rectangle>
+
+    <event name="onNodeReady"><![CDATA[
+        if NCN == nil then return; end;
+        local __it = NCN.CY.porNome(sheet.catId or sheet.nome);
+        NCN.ajustarNota(self, sheet, __it and __it.nota or "", 46);
+        NCN.chipItem(self, sheet, "instalado", "#23E5D3");
+        pcall(function() self.lblTipo.text = NCN.CY.tipoDe(tonumber(sheet.humanidade) or 0); end);
+    ]]></event>
+
+    <dataLink fields="{'humanidade','preco','nome'}">
+        <event name="onChange"><![CDATA[
+            if NCN == nil then return; end;
+            pcall(function() self.lblTipo.text = NCN.CY.tipoDe(tonumber(sheet.humanidade) or 0); end);
+            NCN.tocar(NDB.getRoot(sheet));
+        ]]></event>
+    </dataLink>
+
+    <!-- A exclusividade apaga o chip do IRMÃO; sem este dataLink ele
+         continuaria aceso na tela mesmo já desmarcado no dado. -->
+    <dataLink fields="{'instalado'}">
+        <event name="onChange"><![CDATA[
+            if NCN == nil then return; end;
+            NCN.chipItem(self, sheet, "instalado", "#23E5D3");
+        ]]></event>
+    </dataLink>
+</form>

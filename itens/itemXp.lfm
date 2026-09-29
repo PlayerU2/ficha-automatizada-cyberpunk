@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Registro de XP por sessão (Cap. 13). O log existe para que "de onde veio
+  esse XP" tenha resposta seis sessões depois.
+-->
+<form name="itemXp" height="24" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+        <rectangle align="left" width="120" margins="{left=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="data" hint="Data ou nº da sessão"></edit></rectangle>
+        <layout align="right" width="82">
+            <rectangle align="left" width="56" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="xp" type="number" horzTextAlign="center"></edit></rectangle>
+            <rectangle align="left" width="26" color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                    cursor="handPoint" hint="Remover este registro (não desconta o XP total — ajuste o campo acima)">
+                <label align="client" text="x" class="aba" fontColor="#FF3B7F"
+                       horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                <event name="onClick"><![CDATA[
+                    local raiz = NDB.getRoot(sheet);
+                    NDB.deleteNode(sheet);
+                    if NCN ~= nil then NCN.tocar(raiz); end;
+                ]]></event>
+            </rectangle>
+        </layout>
+        <rectangle align="client" margins="{left=2,right=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="descricao" hint="Participou · objetivo · interpretação · risco genuíno"></edit></rectangle>
+    </rectangle>
+</form>

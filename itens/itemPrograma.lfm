@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LINHA DE PROGRAMA DE NETRUNNING (Cap. 10) — mesma gramática das listas de
+  Equipamento, para que a aba Netrunning não pareça de outro sistema.
+
+  COLUNAS itemPrograma: 4 10 * 56 72 28 26
+
+  PARTE é a parte do deck que o programa ocupa. O efeito permanente já entra no
+  Valor-Alvo da aba Netrunning sozinho; os condicionais (Chave-Mestra, Backdoor,
+  Autópsia) não entram, e o texto deles vive na segunda linha — é lá que o
+  jogador lê quanto lançar no MOD. MANUAL.
+-->
+<form name="itemPrograma" height="28" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+
+        <layout align="top" height="28">
+
+            <rectangle align="left" width="4" color="#8A63C9"/>
+            <rectangle align="left" width="10" margins="{left=4,right=4}" color="#080A0F"/>
+
+            <layout align="right" width="215">
+                <rectangle align="left" width="56" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="parte" type="number" fontSize="16" fontStyle="bold" fontColor="#8A63C9" horzTextAlign="center" hint="Partes do deck que o programa ocupa (Cap. 10)"></edit></rectangle>
+                <rectangle align="left" width="72" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="preco" type="number" horzTextAlign="center" hint="Preço em eddies"></edit></rectangle>
+
+                <rectangle name="btDetalhe" align="left" width="28"
+                           margins="{right=3,top=1,bottom=1}"
+                           color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                           xradius="3" yradius="3" cornerType="round" cursor="handPoint"
+                           hint="O que o programa faz">
+                    <label name="txtDetalhe" align="client" text="···" class="val"
+                           fontStyle="bold" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        if NCN ~= nil then
+                            NCN.alternarDetalhe(self, sheet,
+                                NCN.EQ.programaPorNome(sheet.catId or sheet.nome), 54, "efeito");
+                        end;
+                    ]]></event>
+                </rectangle>
+
+                <rectangle align="left" width="26" margins="{top=1,bottom=1}"
+                           color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                           xradius="3" yradius="3" cornerType="round"
+                           cursor="handPoint" hint="Remover este programa">
+                    <label align="client" text="×" class="val" fontColor="#FF3B7F"
+                           horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        local raiz = NDB.getRoot(sheet);
+                        NDB.deleteNode(sheet);
+                        if NCN ~= nil then NCN.tocar(raiz); end;
+                    ]]></event>
+                </rectangle>
+            </layout>
+
+            <rectangle align="client" margins="{right=2,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" name="edNome" field="nome" fontSize="15" fontColor="#8A63C9"></edit></rectangle>
+        </layout>
+
+        <layout name="linhaNota" align="top" height="0">
+            <rectangle align="client" margins="{left=6,right=6,top=1,bottom=3}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" field="efeito" hint="Efeito permanente já entra no Valor-Alvo. Condicional você lança no MOD. MANUAL."></edit></rectangle>
+        </layout>
+
+    </rectangle>
+
+    <event name="onNodeReady"><![CDATA[
+        if NCN == nil then return; end;
+        local __it = NCN.EQ.programaPorNome(sheet.catId or sheet.nome);
+        NCN.ajustarLinhaItem(self, sheet, __it, 54, "efeito");
+        NCN.dica(self.edNome, __it ~= nil and __it.nota or "");
+    ]]></event>
+
+    <dataLink fields="{'preco','parte','nome'}">
+        <event name="onChange"><![CDATA[
+            if NCN ~= nil then NCN.tocar(NDB.getRoot(sheet)); end;
+        ]]></event>
+    </dataLink>
+</form>

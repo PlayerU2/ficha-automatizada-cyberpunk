@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LINHA DE ARMA — gramática de coluna comum às quatro listas de Equipamento.
+
+  A REGRA QUE ESTA LINHA EXISTE PARA OBEDECER: o NOME é a única coluna
+  elástica. Todo o resto tem largura fixa e soma 294 px. Era o contrário até a
+  v2.9.5 — o nome tinha 248 px fixos e o botão de detalhe ficava com "o que
+  sobrar" — e por isso, em janela estreita, o que sobrava virava NEGATIVO e a
+  linha quebrava na tela do jogador. Quem cede espaço tem que ser o texto que
+  pode virar reticências, nunca um botão.
+
+  DECLARAÇÃO DE COLUNAS (a verificação 41 confere que o cabeçalho em
+  parte4_abas5a10.xml declara exatamente estas larguras, nesta ordem):
+  COLUNAS itemArma: 4 10 * 86 72 44 28 26
+
+  Sem popup: `field=` dentro de <popup> resolve contra a ficha raiz, não contra
+  o nó do item — um popup de detalhe aqui leria e gravaria no lugar errado.
+-->
+<form name="itemArma" height="28" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+
+        <layout align="top" height="28">
+
+            <rectangle name="barra_equipada" align="left" width="4" color="#080A0F"/>
+            <rectangle name="pontoOcultacao" align="left" width="10"
+                       margins="{left=4,right=4,top=9,bottom=9}"
+                       color="#232B3D" strokeColor="#232B3D" strokeSize="1"
+                       xradius="5" yradius="5" cornerType="round"
+                       hint="Tamanho de ocultação (Cap. 9)"/>
+
+            <layout align="right" width="270">
+                <rectangle align="left" width="86" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="dano" fontSize="16" fontStyle="bold" fontColor="#FF3B7F" horzTextAlign="center" hint="Ex.: 2d6+1 · 1d6+COR"></edit></rectangle>
+                <rectangle align="left" width="72" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="preco" type="number" horzTextAlign="center" hint="Preço em eddies"></edit></rectangle>
+
+                <rectangle name="chip_equipada" align="left" width="44"
+                           margins="{right=3,top=1,bottom=1}" color="#080A0F"
+                           strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3"
+                           cornerType="round" cursor="handPoint"
+                           hint="Equipada — é esta arma que alimenta a aba COMBATE. Só uma por vez.">
+                    <label name="txt_equipada" align="client" text="EQP" class="rotMin"
+                           fontStyle="bold" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        sheet.equipada = not (sheet.equipada == true);
+                        local raiz = NDB.getRoot(sheet);
+                        if sheet.equipada == true and raiz ~= nil then
+                            local lista = raiz.armasEquipamento;
+                            if lista ~= nil then
+                                local filhos = NDB.getChildNodes(lista);
+                                for i = 1, #filhos do
+                                    if filhos[i] ~= sheet then filhos[i].equipada = false; end;
+                                end;
+                            end;
+                        end;
+                        if NCN ~= nil then
+                            NCN.chipItem(self, sheet, "equipada", "#3DD68C");
+                            NCN.tocar(NDB.getRoot(sheet));
+                        end;
+                    ]]></event>
+                </rectangle>
+
+                <rectangle name="btDetalhe" align="left" width="28"
+                           margins="{right=3,top=1,bottom=1}"
+                           color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                           xradius="3" yradius="3" cornerType="round" cursor="handPoint"
+                           hint="Perícia de ataque, alcance, traço e nota">
+                    <label name="txtDetalhe" align="client" text="···" class="val"
+                           fontStyle="bold" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        if NCN ~= nil then
+                            NCN.alternarDetalhe(self, sheet,
+                                NCN.EQ.armaPorNome(sheet.catId or sheet.nome), 80);
+                        end;
+                    ]]></event>
+                </rectangle>
+
+                <rectangle align="left" width="26" margins="{top=1,bottom=1}"
+                           color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                           xradius="3" yradius="3" cornerType="round"
+                           cursor="handPoint" hint="Remover esta arma">
+                    <label align="client" text="×" class="val" fontColor="#FF3B7F"
+                           horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        local raiz = NDB.getRoot(sheet);
+                        NDB.deleteNode(sheet);
+                        if NCN ~= nil then NCN.tocar(raiz); end;
+                    ]]></event>
+                </rectangle>
+            </layout>
+
+            <rectangle align="client" margins="{right=2,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" name="edNome" field="nome" fontSize="15"></edit></rectangle>
+        </layout>
+
+        <!-- SEGUNDA LINHA, em DUAS fileiras. Uma só não caberia: tipo, alcance,
+             traço, os dois marcadores e a nota somam mais largura fixa do que
+             uma janela estreita tem. Dividir em "o que a arma é" e "o que ela
+             faz" mantém cada fileira com uma única coluna elástica — a mesma
+             regra da linha principal, aplicada aqui dentro. -->
+        <layout name="linhaNota" align="top" height="0">
+
+            <layout align="top" height="26">
+                <rectangle align="left" width="172" margins="{left=6,right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><label align="right" width="14" text="▾" class="rotMin" horzTextAlign="center" vertTextAlign="center" hitTest="false"/><comboBox align="client" transparent="true" margins="{left=5,right=2}" name="cboTipo" field="tipo" hint="Define qual perícia de combate a ficha usa no /a"></comboBox></rectangle>
+                <rectangle align="left" width="128" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><label align="right" width="14" text="▾" class="rotMin" horzTextAlign="center" vertTextAlign="center" hitTest="false"/><comboBox align="client" transparent="true" margins="{left=5,right=2}" name="cboAlcance" field="classeAlcance" hint="Tabela de Alcance do Cap. 9. Vazio = corpo a corpo."></comboBox></rectangle>
+                <rectangle align="client" margins="{right=6,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" field="traco" hint="Traço do catálogo. Arma embutida diz aqui de qual implante veio."></edit></rectangle>
+            </layout>
+
+            <layout align="top" height="26">
+                <rectangle name="chip_perfurante" align="left" width="96"
+                           margins="{left=6,right=4,top=1,bottom=3}" color="#080A0F"
+                           strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3"
+                           cornerType="round" cursor="handPoint"
+                           hint="Perfurante: ignora metade da RD do alvo, arredondando pra baixo">
+                    <label name="txt_perfurante" align="client" text="PERFURANTE" class="rotMin"
+                           fontStyle="bold" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        sheet.perfurante = not (sheet.perfurante == true);
+                        if NCN ~= nil then
+                            NCN.chipItem(self, sheet, "perfurante", "#FF3B7F");
+                            NCN.tocar(NDB.getRoot(sheet));
+                        end;
+                    ]]></event>
+                </rectangle>
+                <rectangle name="chip_rajada" align="left" width="74"
+                           margins="{right=4,top=1,bottom=3}" color="#080A0F"
+                           strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3"
+                           cornerType="round" cursor="handPoint"
+                           hint="Rajada: −2 no acerto, +1d6 no dano (Cap. 4)">
+                    <label name="txt_rajada" align="client" text="RAJADA" class="rotMin"
+                           fontStyle="bold" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        sheet.rajada = not (sheet.rajada == true);
+                        if NCN ~= nil then
+                            NCN.chipItem(self, sheet, "rajada", "#FFB03A");
+                            NCN.tocar(NDB.getRoot(sheet));
+                        end;
+                    ]]></event>
+                </rectangle>
+                <rectangle align="client" margins="{right=6,top=1,bottom=3}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" field="nota" hint="Sua observação de mesa. A nota do livro fica no catálogo, que abre sempre."></edit></rectangle>
+            </layout>
+
+        </layout>
+
+    </rectangle>
+
+    <event name="onNodeReady"><![CDATA[
+        if NCN == nil then return; end;
+        local __it = NCN.EQ.armaPorNome(sheet.catId or sheet.nome);
+        NCN.ajustarLinhaItem(self, sheet, __it, 80);
+        NCN.chipItem(self, sheet, "equipada", "#3DD68C");
+        NCN.chipItem(self, sheet, "perfurante", "#FF3B7F");
+        NCN.chipItem(self, sheet, "rajada", "#FFB03A");
+        -- A nota do livro saiu da tela e mora aqui: o texto continua a um
+        -- passe de mouse, sem custar largura nenhuma na linha.
+        NCN.dica(self.edNome, __it ~= nil and __it.nota or "");
+        local nomes, chaves = {}, {};
+        for _, t in ipairs(NCN.D.TIPOS_ARMA) do
+            nomes[#nomes+1] = t.nome; chaves[#chaves+1] = t.chave;
+        end;
+        NCN.encherComboDeCampo(self.cboTipo, sheet, "tipo", nomes, chaves);
+
+        local classes = { "" };
+        for _, c in ipairs(NCN.D.CLASSES_ALCANCE) do classes[#classes+1] = c; end;
+        NCN.encherComboDeCampo(self.cboAlcance, sheet, "classeAlcance", classes, classes);
+    ]]></event>
+
+    <dataLink fields="{'dano','preco','tipo','classeAlcance','nome'}">
+        <event name="onChange"><![CDATA[
+            if NCN ~= nil then NCN.tocar(NDB.getRoot(sheet)); end;
+        ]]></event>
+    </dataLink>
+
+    <!-- A exclusividade apaga o chip do IRMÃO; sem este dataLink ele
+         continuaria aceso na tela mesmo já desmarcado no dado. -->
+    <dataLink fields="{'equipada','perfurante','rajada'}">
+        <event name="onChange"><![CDATA[
+            if NCN == nil then return; end;
+            NCN.chipItem(self, sheet, "equipada", "#3DD68C");
+            NCN.chipItem(self, sheet, "perfurante", "#FF3B7F");
+            NCN.chipItem(self, sheet, "rajada", "#FFB03A");
+        ]]></event>
+    </dataLink>
+</form>

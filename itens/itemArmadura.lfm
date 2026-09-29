@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LINHA DE ARMADURA — mesma gramática de coluna da arma: o nome é a única
+  coluna elástica, o resto é fixo, e PREÇO · ⋯ · × ficam na MESMA posição das
+  outras listas. É isso que faz a aba parecer uma coisa só em vez de quatro
+  tabelas diferentes empilhadas.
+
+  COLUNAS itemArmadura: 4 10 * 56 72 44 28 26
+
+  DECISÃO DE MESA: só uma armadura equipada por vez. O livro imprime uma RD por
+  armadura e não fala em empilhar peças, então somar quatro coletes seria
+  inventar regra. Se a sua mesa quiser empilhar, é só apagar o bloco de
+  exclusividade abaixo — a RD já soma sozinha. Cyberware de blindagem (Placas
+  Subdérmicas) NÃO passa por aqui: soma como RD natural, à parte.
+-->
+<form name="itemArmadura" height="28" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+
+        <layout align="top" height="28">
+
+            <rectangle name="barra_equipada" align="left" width="4" color="#080A0F"/>
+            <rectangle name="pontoOcultacao" align="left" width="10"
+                       margins="{left=4,right=4,top=9,bottom=9}"
+                       color="#232B3D" strokeColor="#232B3D" strokeSize="1"
+                       xradius="5" yradius="5" cornerType="round"
+                       hint="Tamanho de ocultação (Cap. 9)"/>
+
+            <layout align="right" width="240">
+                <rectangle align="left" width="56" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="rd" type="number" fontSize="16" fontStyle="bold" fontColor="#23E5D3" horzTextAlign="center" hint="Roupa reforçada 1 · Colete leve 2 · Tática/corp 4 · Militar pesada 6"></edit></rectangle>
+                <rectangle align="left" width="72" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="preco" type="number" horzTextAlign="center" hint="Preço em eddies"></edit></rectangle>
+
+                <rectangle name="chip_equipada" align="left" width="44"
+                           margins="{right=3,top=1,bottom=1}" color="#080A0F"
+                           strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3"
+                           cornerType="round" cursor="handPoint"
+                           hint="Vestida — a RD entra na ficha e a penalidade também. Só uma por vez.">
+                    <label name="txt_equipada" align="client" text="EQP" class="rotMin"
+                           fontStyle="bold" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        sheet.equipada = not (sheet.equipada == true);
+                        local raiz = NDB.getRoot(sheet);
+                        if sheet.equipada == true and raiz ~= nil then
+                            local lista = raiz.armadurasEquipamento;
+                            if lista ~= nil then
+                                local filhos = NDB.getChildNodes(lista);
+                                for i = 1, #filhos do
+                                    if filhos[i] ~= sheet then filhos[i].equipada = false; end;
+                                end;
+                            end;
+                        end;
+                        if NCN ~= nil then
+                            NCN.chipItem(self, sheet, "equipada", "#3DD68C");
+                            NCN.tocar(NDB.getRoot(sheet));
+                        end;
+                    ]]></event>
+                </rectangle>
+
+                <rectangle name="btDetalhe" align="left" width="28"
+                           margins="{right=3,top=1,bottom=1}"
+                           color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                           xradius="3" yradius="3" cornerType="round" cursor="handPoint"
+                           hint="Sua observação de mesa">
+                    <label name="txtDetalhe" align="client" text="···" class="val"
+                           fontStyle="bold" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        if NCN ~= nil then
+                            NCN.alternarDetalhe(self, sheet,
+                                NCN.EQ.armaduraPorNome(sheet.catId or sheet.nome), 54);
+                        end;
+                    ]]></event>
+                </rectangle>
+
+                <rectangle align="left" width="26" margins="{top=1,bottom=1}"
+                           color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                           xradius="3" yradius="3" cornerType="round"
+                           cursor="handPoint" hint="Remover esta armadura">
+                    <label align="client" text="×" class="val" fontColor="#FF3B7F"
+                           horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        local raiz = NDB.getRoot(sheet);
+                        NDB.deleteNode(sheet);
+                        if NCN ~= nil then NCN.tocar(raiz); end;
+                    ]]></event>
+                </rectangle>
+            </layout>
+
+            <rectangle align="client" margins="{right=2,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" name="edNome" field="nome" fontSize="15"></edit></rectangle>
+        </layout>
+
+        <layout name="linhaNota" align="top" height="0">
+            <rectangle align="client" margins="{left=6,right=6,top=1,bottom=3}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" field="nota" hint="A penalidade de Furtividade/Atletismo do catálogo entra sozinha quando equipada"></edit></rectangle>
+        </layout>
+
+    </rectangle>
+
+    <dataLink fields="{'rd','preco','nome'}">
+        <event name="onChange"><![CDATA[
+            if NCN ~= nil then NCN.tocar(NDB.getRoot(sheet)); end;
+        ]]></event>
+    </dataLink>
+
+    <event name="onNodeReady"><![CDATA[
+        if NCN == nil then return; end;
+        local __it = NCN.EQ.armaduraPorNome(sheet.catId or sheet.nome);
+        NCN.ajustarLinhaItem(self, sheet, __it, 54);
+        NCN.chipItem(self, sheet, "equipada", "#3DD68C");
+        NCN.dica(self.edNome, __it ~= nil and __it.nota or "");
+    ]]></event>
+
+    <!-- A exclusividade apaga o chip do IRMÃO; sem este dataLink ele
+         continuaria aceso na tela mesmo já desmarcado no dado. -->
+    <dataLink fields="{'equipada'}">
+        <event name="onChange"><![CDATA[
+            if NCN == nil then return; end;
+            NCN.chipItem(self, sheet, "equipada", "#3DD68C");
+        ]]></event>
+    </dataLink>
+</form>

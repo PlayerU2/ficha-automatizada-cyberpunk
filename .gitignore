@@ -1,0 +1,25 @@
+# Saída do rdk: gerada a cada compilação, nunca versionada.
+output/
+*.rpk
+
+# Lua compilado
+*.luac
+luac.out
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*~
+
+# NVIDIA / GPU cache do rdk
+NVIDIA Corporation/
+
+# Cache Python
+__pycache__/
+*.pyc

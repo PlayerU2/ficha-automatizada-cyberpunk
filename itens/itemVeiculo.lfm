@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Linha de veículo (Cap. 12). `ativo` marca qual entra no teste de
+  perseguição — só um por vez. `peAtual` é a Estrutura restante, e fica livre
+  mesmo com a ficha finalizada: bater o carro é uso de jogo.
+-->
+<form name="itemVeiculo" height="26" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+        <rectangle align="left" width="210" margins="{left=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="nome"></edit></rectangle>
+        <rectangle name="chip_ativo" align="left" width="52" color="#080A0F"
+                       strokeColor="#2A3145" strokeSize="1" xradius="2" yradius="2"
+                       cornerType="round" cursor="handPoint" hint="ativo"
+                       margins="{top=4,bottom=4,right=3}">
+                <label name="txt_ativo" align="client" text="ativo" class="val" fontSize="12"
+                       horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                <event name="onClick"><![CDATA[
+                    sheet.ativo = not (sheet.ativo == true);
+                    local raiz = NDB.getRoot(sheet);
+                    if sheet.ativo == true and raiz ~= nil then
+                        local lista = raiz.veiculos;
+                        if lista ~= nil then
+                            local filhos = NDB.getChildNodes(lista);
+                            for i = 1, #filhos do
+                                if filhos[i] ~= sheet then filhos[i].ativo = false; end;
+                            end;
+                        end;
+                    end;
+                    if NCN ~= nil then
+                        NCN.chipItem(self, sheet, "ativo", "#3DD68C");
+                        NCN.tocar(NDB.getRoot(sheet));
+                    end;
+                ]]></event>
+            </rectangle>
+        <layout align="right" width="336">
+            <rectangle align="left" width="52" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="vel" type="number" horzTextAlign="center"></edit></rectangle>
+            <rectangle align="left" width="52" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="man" type="number" horzTextAlign="center" hint="Manobrabilidade — soma no teste de perseguição"></edit></rectangle>
+            <layout align="left" width="100">
+                <rectangle align="left" width="44" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="peAtual" type="number" horzTextAlign="center" hint="Estrutura restante"></edit></rectangle>
+                <label align="left" width="12" text="/" class="rotMin"
+                       horzTextAlign="center" vertTextAlign="center"/>
+                <rectangle align="client" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="pe" type="number" horzTextAlign="center"></edit></rectangle>
+            </layout>
+            <rectangle align="left" width="46" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="rd" type="number" horzTextAlign="center"></edit></rectangle>
+            <rectangle align="left" width="60" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="preco" type="number" horzTextAlign="center"></edit></rectangle>
+            <rectangle align="left" width="26" color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                    cursor="handPoint" hint="Remover este veículo">
+                <label align="client" text="x" class="aba" fontColor="#FF3B7F"
+                       horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                <event name="onClick"><![CDATA[
+                    local raiz = NDB.getRoot(sheet);
+                    NDB.deleteNode(sheet);
+                    if NCN ~= nil then NCN.tocar(raiz); end;
+                ]]></event>
+            </rectangle>
+        </layout>
+        <rectangle align="client" margins="{left=2,right=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="nota"></edit></rectangle>
+    </rectangle>
+
+    <dataLink fields="{'vel','man','rd','preco','nome','aereo'}">
+        <event name="onChange"><![CDATA[
+            if NCN ~= nil then NCN.tocar(NDB.getRoot(sheet)); end;
+        ]]></event>
+    </dataLink>
+
+    <event name="onNodeReady"><![CDATA[
+        if NCN == nil then return; end;
+        NCN.chipItem(self, sheet, "ativo", "#3DD68C");
+    ]]></event>
+
+    <!-- A exclusividade apaga o chip do IRMÃO; sem este dataLink ele
+         continuaria aceso na tela mesmo já desmarcado no dado. -->
+    <dataLink fields="{'ativo'}">
+        <event name="onChange"><![CDATA[
+            if NCN == nil then return; end;
+            NCN.chipItem(self, sheet, "ativo", "#3DD68C");
+        ]]></event>
+    </dataLink>
+</form>

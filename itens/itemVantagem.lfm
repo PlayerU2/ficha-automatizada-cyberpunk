@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Linha de vantagem. A categoria (Criação / XP / Narrativa / as cinco sociais)
+  aparece colorida: é ela que decide se dá pra comprar depois que a campanha
+  começou. Na v1 o custo se chamava `valor` — a migração cuida disso, mas o
+  que se vê aqui é sempre `custo`.
+-->
+<form name="itemVantagem" height="26" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+        <rectangle align="left" width="270" margins="{left=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="nome" fontColor="#23E5D3"></edit></rectangle>
+        <label name="lblCategoria" align="left" width="150" text="—" class="rot"
+               vertTextAlign="center" margins="{left=4}"/>
+        <layout align="right" width="82">
+            <rectangle align="left" width="56" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="custo" type="number" horzTextAlign="center" hint="Onde o livro imprime faixa (5/10/20 ou 10-15), o valor é combinado com o mestre"></edit></rectangle>
+            <rectangle align="left" width="26" color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                    cursor="handPoint" hint="Remover esta vantagem">
+                <label align="client" text="x" class="aba" fontColor="#FF3B7F"
+                       horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                <event name="onClick"><![CDATA[
+                    local raiz = NDB.getRoot(sheet);
+                    NDB.deleteNode(sheet);
+                    if NCN ~= nil then NCN.tocar(raiz); end;
+                ]]></event>
+            </rectangle>
+        </layout>
+        <rectangle align="client" margins="{left=2,right=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="efeito"></edit></rectangle>
+    </rectangle>
+
+    <event name="onNodeReady"><![CDATA[
+        if NCN == nil then return; end;
+        local c = NCN.TR.CATEGORIA[sheet.categoria or ""];
+        pcall(function()
+            self.lblCategoria.text = c and c.nome or "—";
+            if c ~= nil then
+                self.lblCategoria.fontColor = c.cor;
+                self.lblCategoria.hint = c.explica;
+            end;
+        end);
+    ]]></event>
+
+    <dataLink fields="{'custo','nome','categoria'}">
+        <event name="onChange"><![CDATA[
+            if NCN == nil then return; end;
+            local c = NCN.TR.CATEGORIA[sheet.categoria or ""];
+            pcall(function()
+                self.lblCategoria.text = c and c.nome or "—";
+                if c ~= nil then self.lblCategoria.fontColor = c.cor; end;
+            end);
+            NCN.tocar(NDB.getRoot(sheet));
+        ]]></event>
+    </dataLink>
+</form>

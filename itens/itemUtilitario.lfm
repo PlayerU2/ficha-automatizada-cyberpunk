@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LINHA DE EQUIPAMENTO E MEDTECH — mesma gramática da arma e da armadura.
+
+  COLUNAS itemUtilitario: 4 10 * 48 56 72 28 26
+
+  `cargas` é o consumo de jogo (Kit Médico, Maleta de Trauma, Nanobots) e fica
+  livre mesmo com a ficha finalizada: gastar carga no meio do combate não pode
+  depender do mestre.
+
+  O EFEITO saiu da linha principal e desceu para o ⋯. Ele é texto do livro,
+  copiado igual em toda linha, e era ele que enchia a lista de letrinha pequena
+  — o que os jogadores chamaram de confusão. Continua a um clique, e a nota do
+  catálogo aparece na dica do nome.
+-->
+<form name="itemUtilitario" height="28" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+
+        <layout align="top" height="28">
+
+            <rectangle align="left" width="4" color="#080A0F"/>
+            <rectangle name="pontoOcultacao" align="left" width="10"
+                       margins="{left=4,right=4,top=9,bottom=9}"
+                       color="#232B3D" strokeColor="#232B3D" strokeSize="1"
+                       xradius="5" yradius="5" cornerType="round"
+                       hint="Tamanho de ocultação (Cap. 9)"/>
+
+            <layout align="right" width="245">
+                <rectangle align="left" width="48" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="qtd" type="number" horzTextAlign="center" hint="Quantidade — multiplica o preço no resumo de gastos"></edit></rectangle>
+                <rectangle align="left" width="56" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="cargas" type="number" horzTextAlign="center" hint="Cargas restantes. Livre mesmo com a ficha finalizada."></edit></rectangle>
+                <rectangle align="left" width="72" margins="{right=4,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="preco" type="number" horzTextAlign="center" hint="Preço unitário em eddies"></edit></rectangle>
+
+                <rectangle name="btDetalhe" align="left" width="28"
+                           margins="{right=3,top=1,bottom=1}"
+                           color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                           xradius="3" yradius="3" cornerType="round" cursor="handPoint"
+                           hint="Efeito e sua observação de mesa">
+                    <label name="txtDetalhe" align="client" text="···" class="val"
+                           fontStyle="bold" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        if NCN ~= nil then
+                            NCN.alternarDetalhe(self, sheet,
+                                NCN.EQ.itemPorNome(sheet.catId or sheet.nome), 54, "efeito");
+                        end;
+                    ]]></event>
+                </rectangle>
+
+                <rectangle align="left" width="26" margins="{top=1,bottom=1}"
+                           color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                           xradius="3" yradius="3" cornerType="round"
+                           cursor="handPoint" hint="Remover este item">
+                    <label align="client" text="×" class="val" fontColor="#FF3B7F"
+                           horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <event name="onClick"><![CDATA[
+                        local raiz = NDB.getRoot(sheet);
+                        NDB.deleteNode(sheet);
+                        if NCN ~= nil then NCN.tocar(raiz); end;
+                    ]]></event>
+                </rectangle>
+            </layout>
+
+            <rectangle align="client" margins="{right=2,top=1,bottom=1}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" name="edNome" field="nome" fontSize="15"></edit></rectangle>
+        </layout>
+
+        <layout name="linhaNota" align="top" height="0">
+            <rectangle align="client" margins="{left=6,right=6,top=1,bottom=3}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=6,right=4}" field="efeito" hint="O que o item faz. Vem preenchido do catálogo e você pode reescrever."></edit></rectangle>
+        </layout>
+
+    </rectangle>
+
+    <event name="onNodeReady"><![CDATA[
+        if NCN == nil then return; end;
+        local __it = NCN.EQ.itemPorNome(sheet.catId or sheet.nome);
+        NCN.ajustarLinhaItem(self, sheet, __it, 54, "efeito");
+        NCN.pintarOcultacao(self, __it);
+        NCN.dica(self.edNome, __it ~= nil and __it.nota or "");
+    ]]></event>
+
+    <dataLink fields="{'qtd','preco','nome'}">
+        <event name="onChange"><![CDATA[
+            if NCN ~= nil then NCN.tocar(NDB.getRoot(sheet)); end;
+        ]]></event>
+    </dataLink>
+</form>

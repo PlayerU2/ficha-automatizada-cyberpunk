@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Linha de desvantagem. "Resolve depois" fica visível de propósito: é o gancho
+  narrativo que o mestre puxa, e o jogador precisa lembrar que ele existe.
+-->
+<form name="itemDesvantagem" height="46" width="1000" margins="{bottom=2}">
+    <rectangle align="client" color="#080A0F" strokeColor="#1C2130" strokeSize="1">
+
+        <layout align="top" height="26">
+            <rectangle align="left" width="270" margins="{left=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="nome" fontColor="#FF3B7F"></edit></rectangle>
+            <layout align="right" width="82">
+                <rectangle align="left" width="56" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="retorno" type="number" horzTextAlign="center" hint="Pontos que voltam pro orçamento. O total é cortado em +40 (Cap. 14)."></edit></rectangle>
+                <rectangle align="left" width="26" color="#141A26" strokeColor="#2A3145" strokeSize="1"
+                    cursor="handPoint" hint="Remover. Em jogo, remover custa o dobro em XP mais um arco narrativo (Cap. 13).">
+                <label align="client" text="x" class="aba" fontColor="#FF3B7F"
+                       horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                <event name="onClick"><![CDATA[
+                    local raiz = NDB.getRoot(sheet);
+                    NDB.deleteNode(sheet);
+                    if NCN ~= nil then NCN.tocar(raiz); end;
+                ]]></event>
+            </rectangle>
+            </layout>
+            <rectangle align="client" margins="{left=2}" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="efeito"></edit></rectangle>
+        </layout>
+
+        <layout align="top" height="18">
+            <label align="left" width="110" text="  resolve depois" class="rotMin" vertTextAlign="center"/>
+            <label name="lblCustoRemover" align="right" width="230" text="" class="conta"
+                   horzTextAlign="trailing" vertTextAlign="center" margins="{right=4}"/>
+            <rectangle align="client" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="resolve"></edit></rectangle>
+        </layout>
+
+    </rectangle>
+
+    <event name="onNodeReady"><![CDATA[
+        if NCN == nil then return; end;
+        local dobro = (tonumber(sheet.retorno) or 0) * 2;
+        pcall(function()
+            self.lblCustoRemover.text = "remover custa " .. dobro .. " XP + arco narrativo";
+        end);
+    ]]></event>
+
+    <dataLink fields="{'retorno','nome'}">
+        <event name="onChange"><![CDATA[
+            if NCN == nil then return; end;
+            local dobro = (tonumber(sheet.retorno) or 0) * 2;
+            pcall(function()
+                self.lblCustoRemover.text = "remover custa " .. dobro .. " XP + arco narrativo";
+            end);
+            NCN.tocar(NDB.getRoot(sheet));
+        ]]></event>
+    </dataLink>
+</form>
