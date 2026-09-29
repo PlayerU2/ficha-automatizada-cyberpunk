@@ -3160,7 +3160,7 @@
         <tituloSec titulo="IDENTIDADE" cor="#23E5D3" ajuda=""/>
         <layout align="top" height="283" margins="{top=4}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <layout align="right" width="220" margins="{right=8,top=8,bottom=8}">
                     <image align="client" field="imagemPerfil" editable="true"
                            animate="true" style="autoFit"/>
@@ -3341,7 +3341,7 @@
         <tituloSec titulo="ATAQUE — Cap. 4 e Cap. 15" cor="#FF3B7F" ajuda=""/>
         <layout align="top" height="124" margins="{top=4}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <rectangle align="top" height="2" color="#FF3B7F"/>
 
                 <layout align="left" width="148" margins="{left=10,top=6,bottom=8}">
@@ -3388,7 +3388,7 @@
              uma coisa e a outra. -->
         <layout align="top" height="192" margins="{top=4}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <layout align="client" margins="{left=12,right=12,top=10,bottom=10}">
                     <layout align="top" height="49">
                         <campoCombo rot="COBERTURA DO ALVO" nome="cboCobertura" campo="cenaCobertura" w="180"/>
@@ -3461,7 +3461,7 @@
         <tituloSec titulo="CYBERWARE E HUMANIDADE — Cap. 6" cor="#FF3B7F" ajuda="Humanidade não volta com XP (Cap. 13). É a única moeda do sistema que só desce."/>
         <layout align="top" height="104" margins="{top=4}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <rectangle align="top" height="2" color="#FF3B7F"/>
                 <layout align="left" width="202" margins="{left=12,top=6,bottom=6}">
                     <label align="top" height="17" text="HUMANIDADE" class="rotMin" horzTextAlign="center"/>
@@ -3582,7 +3582,7 @@
         <tituloSec titulo="RIQUEZA — Cap. 7" cor="#FFB03A" ajuda="Criação: só agora. XP: a qualquer momento. Narrativa e as cinco sociais: o mestre concede, nunca a loja.  ·  Só entram na criação. Depois, só dá pra remover — dobro do valor em XP mais um arco narrativo que resolva (Cap. 13).  ·  Transferir Limpos em quantia grande, ou usá-los pra comprar algo ilegal, exige teste de Manha (lavagem) ou chama atenção de compliance e credores (Cap. 7)."/>
         <layout align="top" height="98" margins="{top=4}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <rectangle align="top" height="2" color="#FFB03A"/>
                 <layout align="client" margins="{left=10,right=10,top=6,bottom=6}">
                     <layout align="top" height="51">
@@ -3708,7 +3708,7 @@
         </layout>
         <layout align="top" height="117" margins="{top=4}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <rectangle align="top" height="2" color="#8A63C9"/>
 
                 <layout align="left" width="198" margins="{left=12,top=6,bottom=6}">
@@ -3829,7 +3829,7 @@
         </layout>
         <layout align="top" height="117" margins="{top=4}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <rectangle align="top" height="2" color="#3DD68C"/>
 
                 <layout align="left" width="198" margins="{left=12,top=6,bottom=6}">
@@ -3912,7 +3912,7 @@
         <tituloSec titulo="ORÇAMENTO — Cap. 14" cor="#3DD68C" ajuda=""/>
         <layout align="top" height="119" margins="{top=4}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <rectangle align="top" height="2" color="#3DD68C"/>
                 <layout align="left" width="198" margins="{left=12,top=8,bottom=8}">
                     <label align="top" height="17" text="SALDO" class="rotMin" horzTextAlign="center"/>
@@ -4144,7 +4144,14 @@
     <template name="campoTxt">
         <layout align="left" width="$(w)" margins="{right=8}">
             <label align="top" height="17" text="$(rot)" class="rotMin"/>
-            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(campo)"></edit></rectangle>
+            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(campo)"></edit></rectangle>
+        </layout>
+    </template>
+
+    <template name="campoTxtClient">
+        <layout align="client" margins="{right=8}">
+            <label align="top" height="17" text="$(rot)" class="rotMin"/>
+            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(campo)"></edit></rectangle>
         </layout>
     </template>
 
@@ -4170,12 +4177,12 @@
     <template name="cardValor">
         <layout name="wrapHud$(id)" align="left" width="145" margins="{right=6}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <rectangle align="top" height="3" color="$(cor)"/>
                 <label align="top" height="16" text="$(rotulo)" class="rotMin"
                        horzTextAlign="center" margins="{top=5}"/>
                 <rectangle align="top" height="58" color="#12141C" strokeColor="#232B3D"
-                           strokeSize="1" xradius="3" yradius="3" cornerType="round"
+                           strokeSize="1" xradius="3" yradius="3" cornerType="bevel"
                            margins="{left=10,right=10,top=1}">
                     <label name="hud$(id)" align="client" field="$(campo)" text="0"
                            fontSize="30" fontStyle="bold" fontFamily="Rajdhani" fontColor="$(cor)"
@@ -4185,7 +4192,7 @@
                        horzTextAlign="center" wordWrap="true" margins="{top=6}"/>
                 <layout align="top" height="24" margins="{left=8,right=8,bottom=6}">
                     <label align="left" width="30" text="aj" class="rotMin" vertTextAlign="center"/>
-                    <rectangle align="client" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(ajuste)" type="number" horzTextAlign="center" hint="A válvula de escape: o caso que o livro não previu entra aqui."></edit></rectangle>
+                    <rectangle align="client" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(ajuste)" type="number" horzTextAlign="center" hint="A válvula de escape: o caso que o livro não previu entra aqui."></edit></rectangle>
                 </layout>
             </rectangle>
         </layout>
@@ -4195,7 +4202,7 @@
     <template name="cardPvFoco">
         <layout name="wrapHud$(id)" align="left" width="145" margins="{right=6}">
             <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round">
+                       xradius="4" yradius="4" cornerType="bevel">
                 <rectangle align="top" height="3" color="$(cor)"/>
                 <label align="top" height="16" text="$(rotulo)" class="rotMin"
                        horzTextAlign="center" margins="{top=5}"/>
@@ -4219,7 +4226,7 @@
                        horzTextAlign="center" wordWrap="true" margins="{top=3}"/>
                 <layout align="top" height="24" margins="{left=8,right=8,bottom=6}">
                     <label align="left" width="30" text="aj" class="rotMin" vertTextAlign="center"/>
-                    <rectangle align="client" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(ajuste)" type="number" horzTextAlign="center"></edit></rectangle>
+                    <rectangle align="client" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(ajuste)" type="number" horzTextAlign="center"></edit></rectangle>
                 </layout>
             </rectangle>
         </layout>
