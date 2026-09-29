@@ -1,5 +1,5 @@
 <module sdkVersion="3.7b">
-    <version>2.9.7</version>
+    <version>3.0.0</version>
     <info lang="pt-BR">
         <name>Night City Noir - Ficha de Personagem</name>
         <description>Ficha de personagem automatizada para o sistema homebrew Night City Noir (3d6 rolar-para-baixo). Catálogos completos do Livro do Jogador v2.1, macros /a e /d, netrunning, perseguições e separacao entre criacao e jogo.</description>
