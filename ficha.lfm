@@ -89,7 +89,7 @@
     NCN.R, NCN.D, NCN.CY, NCN.EQ, NCN.TR = R, D, CY, EQ, TR
 
     NCN.COR = {
-        pagina="#05060A", painel="#0E1017", painelAlt="#12151E", caixa="#080A0F",
+        pagina="#05060A", painel="#0E1017", painelAlt="#12151EB0", caixa="#080A0FB0",
         borda="#1C2130",  bordaViva="#2A3145",
         ciano="#23E5D3",  magenta="#FF3B7F", ambar="#FFB03A",
         verde="#3DD68C",  roxo="#8A63C9",
@@ -3155,15 +3155,17 @@
     <layout name="corpo" align="client">
 
     <!-- ============================== ABA 1 — PERFIL ==================== -->
-    <scrollBox name="painel1" align="client" margins="{left=10,right=10,top=8,bottom=8}">
+    <layout name="painel1" align="client" margins="{left=10,right=10,top=8,bottom=8}">
+        <image align="client" src="images/cyber_bg.jpg" style="autoFit"/>
+        <scrollBox align="client">
 
         <tituloSec titulo="DOSSIE DE REGISTRO // NCPD DATABASE" cor="#23E5D3" ajuda=""/>
-        <layout align="top" height="283" margins="{top=4,bottom=10}">
-            <rectangle align="client" color="#0A0C12" strokeColor="#1C2130" strokeSize="1"
+        <layout align="top" height="350" margins="{top=4,bottom=10}">
+            <rectangle align="client" color="#0A0C12D0" strokeColor="#1C2130" strokeSize="1"
                        xradius="6" yradius="6" cornerType="bevel">
                 
                 <layout align="left" width="220" margins="{left=10,right=10,top=10,bottom=10}">
-                    <rectangle align="client" color="#05060A" strokeColor="#23E5D3" strokeSize="1"
+                    <rectangle align="client" color="#05060AE6" strokeColor="#23E5D3" strokeSize="1"
                                xradius="4" yradius="4" cornerType="bevel">
                         <image align="client" field="imagemPerfil" editable="true"
                                animate="true" style="autoFit" margins="{left=2,right=2,top=2,bottom=2}"/>
@@ -3171,24 +3173,24 @@
                 </layout>
                 
                 <layout align="client" margins="{left=4,right=10,top=10,bottom=10}">
-                    <layout align="top" height="45">
-                        <campoTxt rot="NOME COMPLETO" campo="nome" w="260"/>
-                        <campoTxt rot="ALTER EGO / RUA" campo="alterEgo" w="180"/>
+                    <layout align="top" height="55" margins="{bottom=5}">
+                        <campoTxt rot="NOME COMPLETO" campo="nome" w="300"/>
+                        <campoTxt rot="ALTER EGO / RUA" campo="alterEgo" w="220"/>
                         <layout align="client" margins="{right=6}">
                             <label align="top" height="17" text="CONCEITO // HISTORICO PREGRESSO" class="rotMin"/>
-                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="conceito"></edit></rectangle>
+                            <rectangle align="top" height="30" color="#080A0FD0" strokeColor="#23E5D3" strokeSize="1" xradius="4" yradius="4" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="conceito"></edit></rectangle>
                         </layout>
                     </layout>
                     
-                    <layout align="top" height="45" margins="{top=4}">
-                        <campoTxt rot="PAPEL / PROFISSAO" campo="profissao" w="160"/>
-                        <campoTxt rot="GENERO" campo="genero" w="90"/>
-                        <campoTxt rot="IDADE" campo="idade" w="60"/>
-                        <campoTxt rot="ALTURA" campo="altura" w="65"/>
-                        <campoTxt rot="PESO" campo="peso" w="65"/>
+                    <layout align="top" height="55" margins="{top=10,bottom=5}">
+                        <campoTxt rot="PAPEL / PROFISSAO" campo="profissao" w="200"/>
+                        <campoTxt rot="GENERO" campo="genero" w="110"/>
+                        <campoTxt rot="IDADE" campo="idade" w="80"/>
+                        <campoTxt rot="ALTURA" campo="altura" w="80"/>
+                        <campoTxt rot="PESO" campo="peso" w="80"/>
                         <layout align="client" margins="{right=6}">
                             <label align="top" height="17" text="AFILIACAO / CORP / GANGUE" class="rotMin"/>
-                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="afiliacao"></edit></rectangle>
+                            <rectangle align="top" height="30" color="#080A0FD0" strokeColor="#23E5D3" strokeSize="1" xradius="4" yradius="4" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="afiliacao"></edit></rectangle>
                         </layout>
                     </layout>
 
@@ -3196,16 +3198,16 @@
                         <rectangle align="left" width="2" color="#FFB03A"/>
                         <label align="client" text="   [ACESSO RESTRITO // GANCHOS DO MESTRE] - Cap. 14, passo 8" class="h2" fontColor="#FFB03A" vertTextAlign="center"/>
                     </layout>
-                    <layout align="top" height="45" margins="{top=2}">
-                        <campoTxt rot="UM CONTATO" campo="ganchoContato" w="220"/>
-                        <campoTxt rot="UM RIVAL" campo="ganchoRival" w="220"/>
+                    <layout align="top" height="55" margins="{top=10}">
+                        <campoTxt rot="UM CONTATO" campo="ganchoContato" w="260"/>
+                        <campoTxt rot="UM RIVAL" campo="ganchoRival" w="260"/>
                         <layout align="client" margins="{right=6}">
                             <label align="top" height="17" text="UM SEGREDO" class="rotMin"/>
-                            <rectangle align="top" height="27" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="ganchoSegredo"></edit></rectangle>
+                            <rectangle align="top" height="30" color="#080A0FD0" strokeColor="#FFB03A" strokeSize="1" xradius="4" yradius="4" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="ganchoSegredo"></edit></rectangle>
                         </layout>
                     </layout>
                     
-                    <label name="lblEstadoTexto" align="top" height="30" text="" class="ajuda"
+                    <label name="lblEstadoTexto" align="top" height="0" visible="false" text="" class="ajuda"
                            wordWrap="true" margins="{top=6,right=6}"/>
                 </layout>
             </rectangle>
@@ -3238,7 +3240,7 @@
 
         <tituloSec titulo="PERSONALIDADE E MANEIRISMOS" cor="#8A63C9" ajuda=""/>
         <layout align="top" height="213" margins="{top=4,bottom=8}">
-            <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1" cornerType="bevel" xradius="6" yradius="6">
+            <rectangle align="client" color="#0E1017D0" strokeColor="#1C2130" strokeSize="1" cornerType="bevel" xradius="6" yradius="6">
                 <rectangle align="client" color="#080A0F" strokeColor="#232B3D" strokeSize="1"
                            xradius="2" yradius="2" cornerType="bevel"
                            margins="{left=6,right=6,top=6,bottom=6}">
@@ -3248,7 +3250,8 @@
             </rectangle>
         </layout>
 
-</scrollBox>
+    </scrollBox>
+    </layout>
 
     <!-- ====================== ABA 2 — ATRIBUTOS E PERÍCIAS =============== -->
     <scrollBox name="painel2" align="none" visible="false" margins="{left=10,right=10,top=8,bottom=8}">
@@ -4183,23 +4186,24 @@
     <!-- Card de valor derivado: faixa de cor, rótulo, valor, a conta, ajuste -->
     <template name="cardValor">
         <layout name="wrapHud$(id)" align="left" width="145" margins="{right=6}">
-            <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="bevel">
-                <rectangle align="top" height="3" color="$(cor)"/>
-                <label align="top" height="16" text="$(rotulo)" class="rotMin"
-                       horzTextAlign="center" margins="{top=5}"/>
-                <rectangle align="top" height="58" color="#12141C" strokeColor="#232B3D"
-                           strokeSize="1" xradius="3" yradius="3" cornerType="bevel"
-                           margins="{left=10,right=10,top=1}">
-                    <label name="hud$(id)" align="client" field="$(campo)" text="0"
-                           fontSize="30" fontStyle="bold" fontFamily="Rajdhani" fontColor="$(cor)"
-                           horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
-                </rectangle>
-                <label align="top" height="20" field="$(conta)" class="conta"
-                       horzTextAlign="center" wordWrap="true" margins="{top=6}"/>
-                <layout align="top" height="24" margins="{left=8,right=8,bottom=6}">
-                    <label align="left" width="30" text="aj" class="rotMin" vertTextAlign="center"/>
-                    <rectangle align="client" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(ajuste)" type="number" horzTextAlign="center" hint="A válvula de escape: o caso que o livro não previu entra aqui."></edit></rectangle>
+            <rectangle align="client" color="#05060AB0" strokeColor="$(cor)" strokeSize="1" xradius="4" yradius="4" cornerType="bevel">
+                <rectangle align="top" height="2" color="$(cor)"/>
+                <label align="top" height="20" text="$(rotulo)" class="rotMin" fontColor="$(cor)" horzTextAlign="center" margins="{top=4}"/>
+                
+                <layout align="client" margins="{left=5,right=5,top=2,bottom=2}">
+                    
+                    <label name="hud$(id)" align="client" field="$(campo)" fontSize="36" fontStyle="bold" fontFamily="Rajdhani" fontColor="$(cor)" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                </layout>
+
+                
+                <label align="bottom" height="14" field="$(conta)" class="conta" fontColor="#8B90A6" fontSize="10" horzTextAlign="center" wordWrap="true" margins="{bottom=2}"/>
+
+                
+                <layout align="bottom" height="26" margins="{left=10,right=10,bottom=6}">
+                    <label align="left" width="45" text="AJUSTE" fontColor="#8B90A6" fontSize="10" vertTextAlign="center"/>
+                    <rectangle align="client" color="#000000B0" strokeColor="$(cor)" strokeSize="1" xradius="3" yradius="3" cornerType="bevel">
+                        <edit align="client" transparent="true" margins="{left=2,right=2}" field="$(ajuste)" type="number" horzTextAlign="center" fontColor="#FFFFFF" fontSize="14"></edit>
+                    </rectangle>
                 </layout>
             </rectangle>
         </layout>
@@ -4208,32 +4212,31 @@
     <!-- Card com atual/máximo: PV e Foco Neural -->
     <template name="cardPvFoco">
         <layout name="wrapHud$(id)" align="left" width="145" margins="{right=6}">
-            <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="bevel">
+            <rectangle align="client" color="#05060AB0" strokeColor="$(cor)" strokeSize="2" xradius="6" yradius="6" cornerType="bevel">
                 <rectangle align="top" height="3" color="$(cor)"/>
-                <label align="top" height="16" text="$(rotulo)" class="rotMin"
-                       horzTextAlign="center" margins="{top=5}"/>
-
-                <layout align="top" height="16" margins="{left=10,right=10}">
-                    <label align="left" width="62" text="ATUAL"  class="rotMin" horzTextAlign="center"/>
-                    <label align="client"         text="MÁXIMO" class="rotMin" horzTextAlign="center"/>
+                <label align="top" height="20" text="$(rotulo)" class="rotMin" fontColor="$(cor)" horzTextAlign="center" margins="{top=4}"/>
+                
+                <layout align="top" height="14" margins="{left=10,right=10}">
+                    <label align="left" width="62" text="ATUAL" class="rotMin" fontColor="#8B90A6" fontSize="10" horzTextAlign="center"/>
+                    <label align="client" text="MAXIMO" class="rotMin" fontColor="#8B90A6" fontSize="10" horzTextAlign="center"/>
                 </layout>
-                <layout align="top" height="32" margins="{left=10,right=10,top=1}">
-                    <rectangle align="left" width="62" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" name="hud$(id)Atual" field="$(campoAtual)" type="number" fontSize="24" fontStyle="bold" fontFamily="Rajdhani" horzTextAlign="center" fontColor="#FFFFFF" hint="Valor atual — livre mesmo com a ficha finalizada"></edit></rectangle>
-                    <label align="client" field="$(campoMax)" fontSize="24" fontStyle="bold"
-                           fontFamily="Rajdhani" fontColor="$(cor)"
-                           horzTextAlign="center" vertTextAlign="center"/>
+                
+                <layout align="top" height="36" margins="{left=10,right=10,top=2}">
+                    <rectangle align="left" width="62" color="#000000B0" strokeColor="$(cor)" strokeSize="1" xradius="3" yradius="3" cornerType="round">
+                        <edit align="client" transparent="true" margins="{left=2,right=2}" name="hud$(id)Atual" field="$(campoAtual)" type="number" fontSize="24" fontStyle="bold" fontFamily="Rajdhani" horzTextAlign="center" fontColor="#FFFFFF"></edit>
+                    </rectangle>
+                    <label align="client" field="$(campoMax)" fontSize="24" fontStyle="bold" fontFamily="Rajdhani" fontColor="$(cor)" horzTextAlign="center" vertTextAlign="center"/>
                 </layout>
 
-                <progressBar name="barra$(id)" align="top" height="7" color="$(cor)"
-                             field="$(campoAtual)" fieldMax="$(campoMax)" min="0"
-                             margins="{left=10,right=10,top=6}"/>
+                <progressBar name="barra$(id)" align="top" height="8" color="$(cor)" field="$(campoAtual)" fieldMax="$(campoMax)" min="0" margins="{left=10,right=10,top=8}"/>
 
-                <label align="top" height="20" field="$(conta)" class="conta"
-                       horzTextAlign="center" wordWrap="true" margins="{top=3}"/>
-                <layout align="top" height="24" margins="{left=8,right=8,bottom=6}">
-                    <label align="left" width="30" text="aj" class="rotMin" vertTextAlign="center"/>
-                    <rectangle align="client" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="bevel"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(ajuste)" type="number" horzTextAlign="center"></edit></rectangle>
+                <label align="bottom" height="14" field="$(conta)" class="conta" fontColor="#8B90A6" fontSize="10" horzTextAlign="center" wordWrap="true" margins="{bottom=2}"/>
+                
+                <layout align="bottom" height="26" margins="{left=10,right=10,bottom=6}">
+                    <label align="left" width="45" text="AJUSTE" fontColor="#8B90A6" fontSize="10" vertTextAlign="center"/>
+                    <rectangle align="client" color="#000000B0" strokeColor="$(cor)" strokeSize="1" xradius="3" yradius="3" cornerType="bevel">
+                        <edit align="client" transparent="true" margins="{left=2,right=2}" field="$(ajuste)" type="number" horzTextAlign="center" fontColor="#FFFFFF" fontSize="14"></edit>
+                    </rectangle>
                 </layout>
             </rectangle>
         </layout>
@@ -4253,63 +4256,50 @@
          Verificacao 40. -->
 <template name="cardAtributo">
         <layout name="wrapAtrib$(id)" align="left" width="213" margins="{right=6}">
-            <rectangle align="client" color="#0E1017" strokeColor="#1C2130" strokeSize="1"
-                       xradius="4" yradius="4" cornerType="round"
-                       hint="$(nome) custa $(custo) pontos por ponto acima de 10. Faixa 7 a 16; baixar abaixo de 10 devolve METADE do custo de subir a mesma distância (Cap. 2). O BÔNUS não tem teto: é por ele que cyberware e traço passam de 16.">
-                <rectangle align="top" height="3" color="$(cor)"/>
-
-                <layout align="top" height="20" margins="{left=10,right=10,top=5}">
-                    <label align="left" width="52" text="$(sigla)" fontSize="16" fontStyle="bold"
-                           fontFamily="Rajdhani" fontColor="$(cor)" vertTextAlign="center"/>
-                    <label align="client" text="$(nome)" class="rotMin"
-                           horzTextAlign="trailing" vertTextAlign="center"/>
+            <rectangle align="client" color="#05060AB0" strokeColor="$(cor)" strokeSize="1" xradius="6" yradius="6" cornerType="bevel">
+                <rectangle align="top" height="2" color="$(cor)"/>
+                
+                <layout align="top" height="26" margins="{left=10,right=10,top=4}">
+                    <label align="left" width="52" text="$(sigla)" fontSize="20" fontStyle="bold" fontFamily="Rajdhani" fontColor="$(cor)" vertTextAlign="center"/>
+                    <label align="client" text="$(nome)" class="rotMin" fontColor="$(cor)" horzTextAlign="trailing" vertTextAlign="center"/>
                 </layout>
-
-                <layout align="top" height="48" margins="{left=10,right=10,top=4}">
-                    <layout align="left" width="56">
-                        <label align="top" height="16" text="BASE" class="rotMin" horzTextAlign="center"/>
-                        <rectangle align="top" height="32" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" name="ed$(id)" field="$(campo)" type="number" min="7" max="16" fontSize="24" fontStyle="bold" fontFamily="Rajdhani" horzTextAlign="center" hint="Valor comprado. Piso de 7 e teto de 16 (Cap. 2)."></edit></rectangle>
+                
+                <layout align="top" height="42" margins="{left=10,right=10,top=6}">
+                    <layout align="left" width="46">
+                        <label align="top" height="12" text="BASE" class="rotMin" horzTextAlign="center"/>
+                        <rectangle align="top" height="30" color="#000000B0" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="bevel">
+                            <edit align="client" transparent="true" margins="{left=2,right=2}" name="ed$(id)" field="$(campo)" type="number" fontSize="20" fontFamily="Rajdhani" horzTextAlign="center" fontColor="#FFFFFF"/>
+                        </rectangle>
                     </layout>
-                    <label align="left" width="14" text="+" class="rot"
-                           horzTextAlign="center" vertTextAlign="center" margins="{top=14}"/>
-                    <layout align="left" width="56">
-                        <label align="top" height="16" text="BÔNUS" class="rotMin" horzTextAlign="center"/>
-                        <rectangle align="top" height="32" color="#080A0F" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="round"><edit align="client" transparent="true" margins="{left=4,right=4}" field="bonus$(id)" type="number" fontSize="24" fontStyle="bold" fontFamily="Rajdhani" horzTextAlign="center" fontColor="#9AA0B8" hint="Sem teto: é por aqui que cyberware, traço e o mestre passam do 16."></edit></rectangle>
+                    <label align="left" width="16" text="+" class="rot" horzTextAlign="center" vertTextAlign="center" margins="{top=10}"/>
+                    <layout align="left" width="46">
+                        <label align="top" height="12" text="BONUS" class="rotMin" horzTextAlign="center"/>
+                        <rectangle align="top" height="30" color="#000000B0" strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3" cornerType="bevel">
+                            <edit align="client" transparent="true" margins="{left=2,right=2}" field="bonus$(id)" type="number" fontSize="20" fontFamily="Rajdhani" horzTextAlign="center" fontColor="#FFFFFF"/>
+                        </rectangle>
                     </layout>
-                    <label align="left" width="14" text="=" class="rot"
-                           horzTextAlign="center" vertTextAlign="center" margins="{top=14}"/>
-                    <layout align="client">
-                        <label align="top" height="16" text="TOTAL" class="rotMin" horzTextAlign="center"/>
-                        <rectangle name="painelTotal$(id)" align="top" height="32" color="#12141C"
-                                   strokeColor="$(cor)" strokeSize="1" xradius="3" yradius="3" cornerType="round">
-                            <label name="lblTotal$(id)" align="client" text="10" fontSize="24"
-                                   fontStyle="bold" fontFamily="Rajdhani" fontColor="$(cor)"
-                                   horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                    <label align="left" width="16" text="=" fontColor="$(cor)" fontSize="14" horzTextAlign="center" vertTextAlign="center" margins="{top=10}"/>
+                    <layout align="client" margins="{left=2}">
+                        <label align="top" height="12" text="TOTAL" class="rotMin" horzTextAlign="center"/>
+                        <rectangle name="painelTotal$(id)" align="top" height="30" color="#00000000" strokeColor="$(cor)" strokeSize="1" xradius="3" yradius="3" cornerType="bevel">
+                            <label name="lblTotal$(id)" align="client" text="10" fontSize="26" fontStyle="bold" fontFamily="Rajdhani" fontColor="$(cor)" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
                         </rectangle>
                     </layout>
                 </layout>
 
-                <layout align="top" height="24" margins="{left=10,right=10,top=5}">
-                    <label align="left" width="42" text="custo" class="rotMin" vertTextAlign="center"/>
-                    <label name="lblCusto$(id)" align="left" width="44" text="0" class="valForte"
-                           vertTextAlign="center"/>
-                    <rectangle name="btAtr$(id)" align="right" width="46" color="#141A26"
-                               strokeColor="#2A3145" strokeSize="1" xradius="3" yradius="3"
-                               cornerType="round" cursor="handPoint"
-                               hint="Rola 3d6 contra o atributo puro, pela macro /a da mesa">
-                        <label align="client" text="/a" class="aba" fontColor="$(cor)"
-                               horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+                <layout align="bottom" height="26" margins="{left=10,right=10,bottom=6}">
+                    <label align="left" width="35" text="custo" class="rotMin" vertTextAlign="center"/>
+                    <label name="lblCusto$(id)" align="left" width="30" text="0" fontSize="16" fontStyle="bold" fontFamily="Rajdhani" fontColor="#FFFFFF" vertTextAlign="center"/>
+                    <label align="client" text="" class="rotMin" horzTextAlign="trailing" vertTextAlign="center" margins="{right=8}"/>
+                    <rectangle name="btAtr$(id)" align="right" width="40" color="#000000B0" strokeColor="$(cor)" strokeSize="1" xradius="3" yradius="3" cornerType="bevel" cursor="handPoint">
+                        <label align="client" text="/a" fontSize="14" fontStyle="bold" fontColor="$(cor)" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
                         <event name="onClick"><![CDATA[
-                            NCN.rolarTeste(sheet, NCN.num(sheet.total$(id)),
-                                           "Teste de $(nome)", "$(sigla) puro, sem perícia");
+                            NCN.rolarTeste(sheet, NCN.num(sheet.total$(id)), "Teste de $(nome)", "$(sigla) puro");
                         ]]></event>
                     </rectangle>
-                    <label align="client" text="" class="rotMin"
-                           horzTextAlign="trailing" vertTextAlign="center" margins="{right=8}"/>
                 </layout>
 
-                <label name="lblConta$(id)" align="top" height="0" text="" class="conta"
-                       horzTextAlign="center" wordWrap="true" margins="{left=6,right=6,bottom=6}"/>
+                <label name="lblConta$(id)" align="top" height="0" text="" class="conta" horzTextAlign="center" wordWrap="true" margins="{left=6,right=6,bottom=6}"/>
             </rectangle>
         </layout>
     </template>
@@ -4324,38 +4314,26 @@
 
     <!-- Linha de perícia: nível, Valor-Alvo, ajuste, custo, a conta e o /a -->
     <template name="pericLinha">
-        <layout align="top" height="29" margins="{bottom=1}">
-            <rectangle name="fundo_$(campo)" align="client" color="#080A0F"
-                       strokeColor="#1C2130" strokeSize="1">
-                <label name="nome_$(campo)" align="left" width="236" text="  $(nome)"
-                       class="val" vertTextAlign="center"/>
-                <rectangle align="left" width="40" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" name="nivel_$(campo)" field="$(campo)_nivel" type="number" min="0" max="4" horzTextAlign="center" hint="Nível 0 a 4. O nível 1 apenas zera o −3 de destreinado; o bônus começa no 2 e para em +3 (Cap. 3)."></edit></rectangle>
-                <label name="alvo_$(campo)" align="left" width="50" field="$(campo)_alvo"
-                       fontSize="19" fontStyle="bold" fontFamily="Rajdhani" fontColor="#FF3B7F"
-                       horzTextAlign="center" vertTextAlign="center"/>
-                <rectangle align="left" width="40" color="#080A0F" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round"><edit align="client" transparent="true" margins="{left=5,right=4}" field="$(campo)_ajuste" type="number" horzTextAlign="center" hint="Ajuste manual permanente desta perícia. A válvula de escape: o caso que o livro não previu entra aqui."></edit></rectangle>
-                <label align="left" width="36" field="$(campo)_custo" class="conta"
-                       horzTextAlign="center" vertTextAlign="center"/>
-                <rectangle name="btRolar_$(campo)" align="right" width="34" color="#141A26"
-                           strokeColor="#2A3145" strokeSize="1" cursor="handPoint"
-                           hint="Rola 3d6 contra o Valor-Alvo pela macro /a da mesa">
-                    <label align="client" text="/a" class="aba" fontColor="#23E5D3"
-                           horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
+        <layout align="top" height="34" margins="{bottom=2}">
+            <rectangle name="fundo_$(campo)" align="client" color="#05060A00" strokeColor="#1C2130" strokeSize="1" xradius="4" yradius="4" cornerType="bevel">
+                <label name="nome_$(campo)" align="left" width="236" text="  $(nome)" class="val" vertTextAlign="center" margins="{left=4}" fontSize="16"/>
+                <rectangle align="left" width="40" color="#080A0FD0" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round" margins="{top=3,bottom=3}">
+                    <edit align="client" transparent="true" margins="{left=5,right=4}" name="nivel_$(campo)" field="$(campo)_nivel" type="number" min="0" max="4" horzTextAlign="center" fontSize="16"/>
+                </rectangle>
+                <label name="alvo_$(campo)" align="left" width="50" field="$(campo)_alvo" fontSize="22" fontStyle="bold" fontFamily="Rajdhani" fontColor="#FF3B7F" horzTextAlign="center" vertTextAlign="center"/>
+                <rectangle align="left" width="40" color="#080A0FD0" strokeColor="#232B3D" strokeSize="1" xradius="2" yradius="2" cornerType="round" margins="{top=3,bottom=3}">
+                    <edit align="client" transparent="true" margins="{left=5,right=4}" field="$(campo)_ajuste" type="number" horzTextAlign="center" fontSize="16"/>
+                </rectangle>
+                <label align="left" width="36" field="$(campo)_custo" class="conta" horzTextAlign="center" vertTextAlign="center" fontSize="14"/>
+                <label align="client" field="$(campo)_conta" class="conta" horzTextAlign="leading" vertTextAlign="center" margins="{left=6}" fontSize="14" fontColor="#8B90A6"/>
+                <rectangle name="btRolar_$(campo)" align="right" width="34" color="#141A26D0" strokeColor="#2A3145" strokeSize="1" cursor="handPoint" xradius="4" yradius="4" cornerType="bevel" margins="{top=3,bottom=3,right=3}">
+                    <label align="client" text="/a" class="aba" fontColor="#23E5D3" horzTextAlign="center" vertTextAlign="center" hitTest="false"/>
                     <event name="onClick"><![CDATA[
-                        NCN.rolarTeste(sheet, NCN.num(sheet.$(campo)_alvo),
-                                       "$(nome)", sheet.$(campo)_conta);
+                        NCN.rolarTeste(sheet, NCN.num(sheet.$(campo)_alvo), "$(nome)", sheet.$(campo)_conta);
                     ]]></event>
                 </rectangle>
-                <label name="conta_$(campo)" align="client" field="$(campo)_conta" class="conta"
-                       vertTextAlign="center" margins="{left=8}"/>
             </rectangle>
         </layout>
-        <dataLink field="$(campo)_nivel">
-            <event name="onChange"><![CDATA[ NCN.recalcular(sheet, self); ]]></event>
-        </dataLink>
-        <dataLink field="$(campo)_ajuste">
-            <event name="onChange"><![CDATA[ NCN.recalcular(sheet, self); ]]></event>
-        </dataLink>
     </template>
 
     <!-- Linha de condição do Cap. 5. O chip acende na cor da condição: numa
